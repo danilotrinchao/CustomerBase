@@ -27,7 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{AA459E95
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ClientApp", "ClientApp", "{266DEE65-A349-45CF-B980-BC5BE1CCD4BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CostumerBase.Presentation.Mvc", "CostumerBase.Presentation.Mvc\CostumerBase.Presentation.Mvc.csproj", "{BBDB89CA-A3DE-420B-A07E-95F7045ECD93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CostumerBase.Presentation.Mvc", "CostumerBase.Presentation.Mvc\CostumerBase.Presentation.Mvc.csproj", "{BBDB89CA-A3DE-420B-A07E-95F7045ECD93}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

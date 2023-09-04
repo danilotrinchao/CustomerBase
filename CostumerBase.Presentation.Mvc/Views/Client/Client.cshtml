@@ -3,13 +3,16 @@
 @{
     
 }
+<script src="~/js/Function.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <h1>Detalhes do Cliente</h1>
 
 <div>
     <h2>Informações do Cliente</h2>
-    <p>Nome: @(Model.Name ?? "N/A")</p>
+    <p>Nome: @(Model.NameClient ?? "N/A")</p>
     <p>Email: @(Model.Email ?? "N/A")</p>
-    <p>Logotipo: @(Model.Logotipo ?? "N/A")</p>
+    <p>Logotipo: @(Model.Logo ?? "N/A")</p>
     <h2>Endereços do Cliente</h2>
     <table>
         <thead>
@@ -25,9 +28,9 @@
             </tr>
         </thead>
         <tbody>
-            @if (Model.Addresses != null)
+            @if (Model.AddressClient != null)
             {
-                @foreach (var address in Model.Addresses)
+                @foreach (var address in Model.AddressClient)
                 {
                     <tr>
                         <td>@(address.Country ?? "N/A")</td>
