@@ -4,8 +4,8 @@ CREATE TABLE Clients
     DataCreated DATETIME NOT NULL,
     NameClient NVARCHAR(255) NOT NULL,
     Email NVARCHAR(255) NOT NULL,
-    Logo NVARCHAR(255),
-    AddressClientId UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Addresses(Id)
+    Logo NVARCHAR(255)
+
 );
 CREATE TABLE Addresses
 (
@@ -17,7 +17,8 @@ CREATE TABLE Addresses
     Neighborhood NVARCHAR(255),
     Road NVARCHAR(255),
     Number NVARCHAR(50),
-    Complement NVARCHAR(255)
+    Complement NVARCHAR(255),
+AddressClientId UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Client(Id)
 );
 
 ALTER TABLE Addresses
@@ -66,7 +67,7 @@ AS
 BEGIN
     IF @DeleteAddresses = 1
     BEGIN
-        -- Excluir o cliente e seus endereÁos
+        -- Excluir o cliente e seus endere√ßos
         DELETE FROM Clients
         WHERE Id = @ClientId;
 
@@ -81,7 +82,7 @@ BEGIN
     END;
 END;
 
--------Procedures para endereÁo------------
+-------Procedures para endere√ßo------------
 
 CREATE PROCEDURE InsertAddress
     @Id UNIQUEIDENTIFIER,
@@ -110,10 +111,10 @@ CREATE PROCEDURE UpdateAddress
     @Complement NVARCHAR(255)
 AS
 BEGIN
-    -- Verifica se o endereÁo j· existe para o cliente
+    -- Verifica se o endere√ßo j√° existe para o cliente
     IF EXISTS (SELECT 1 FROM Addresses WHERE ClientId = @ClientId)
     BEGIN
-        -- Atualiza o endereÁo existente
+        -- Atualiza o endere√ßo existente
         UPDATE Addresses
         SET
             Country = @Country,
@@ -128,7 +129,7 @@ BEGIN
     END
     ELSE
     BEGIN
-        -- Insere um novo endereÁo para o cliente
+        -- Insere um novo endere√ßo para o cliente
         INSERT INTO Addresses (Id, ClientId, Country, State, City, Neighborhood, Road, Number, Complement)
         VALUES (NEWID(), @ClientId, @Country, @State, @City, @Neighborhood, @Road, @Number, @Complement);
     END;
