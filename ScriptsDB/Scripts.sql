@@ -21,15 +21,6 @@ CREATE TABLE Addresses
 AddressClientId UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Client(Id)
 );
 
-ALTER TABLE Addresses
-ADD ClientId UNIQUEIDENTIFIER NULL;
-
-ALTER TABLE Clients
-DROP COLUMN AddressClientId;
----Procedures--------
-
-DROP PROCEDURE dbo.UpdateClient;
-DELETE FROM Clients;
 
 CREATE PROCEDURE InsertClient
 	@Id   UNIQUEIDENTIFIER,
