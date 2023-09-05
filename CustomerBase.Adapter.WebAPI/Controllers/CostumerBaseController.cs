@@ -66,17 +66,17 @@ namespace CustomerBase.Adapter.WebAPI.Controllers
             return Ok(listClient);
         }
 
-        [HttpPost("clients")]
+        [HttpPost("createClients")]
         public async Task<ActionResult> RegisterCostumer([FromBody] Client client)
         {
            var register = await _costumerBaseService.CreateClientWithAddress(client);
             return Ok(register);
         }
         
-        [HttpPut("clients/{clientId}")]
-        public async Task<ActionResult> UpdateCliente([FromBody] Client client, bool updateAddress ,Guid? addressId)
+        [HttpPut("updateClients/{clientId}")]
+        public async Task<ActionResult> UpdateCliente([FromBody] Client client)
         {
-            var clientUpdate = await _costumerBaseService.UpdateClientWithAddress(client, updateAddress, addressId); 
+            var clientUpdate = await _costumerBaseService.UpdateClientWithAddress(client); 
             return Ok(clientUpdate);
         }
 

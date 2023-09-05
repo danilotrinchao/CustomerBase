@@ -102,7 +102,7 @@ namespace CustomerBase.Core.ApplicationService.Services
                 _addressRepository.DeleteAddress(id);
         }
 
-        public async Task<bool> UpdateClientWithAddress(Client client, bool updateAddress, Guid? addressId)
+        public async Task<bool> UpdateClientWithAddress(Client client)
         {
             try
             {
@@ -116,16 +116,16 @@ namespace CustomerBase.Core.ApplicationService.Services
                     isSuccess = true;
                 }
 
-                if (updateAddress && addressId.HasValue)
-                {
-                    // Atualize o endereço se o cliente existir e o ID do endereço estiver especificado
-                    var address = await _addressRepository.GetById((Guid)addressId);
-                    if (address != null)
-                    {
-                        _addressRepository.UpdateAddress(address.Id, address.Country, address.State, address.City, address.Neighborhood, address.Road, address.Number, address.Complement);
-                        isSuccess = true;
-                    }
-                }
+                //if (updateAddress && addressId.HasValue)
+                //{
+                //    // Atualize o endereço se o cliente existir e o ID do endereço estiver especificado
+                //    var address = await _addressRepository.GetById((Guid)addressId);
+                //    if (address != null)
+                //    {
+                //        _addressRepository.UpdateAddress(address.Id, address.Country, address.State, address.City, address.Neighborhood, address.Road, address.Number, address.Complement);
+                //        isSuccess = true;
+                //    }
+                //}
 
                 return isSuccess;
             }

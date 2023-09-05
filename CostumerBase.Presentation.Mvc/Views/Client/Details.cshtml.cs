@@ -6,14 +6,14 @@ namespace CostumerBase.Presentation.Mvc.Views.Home
 {
     public class HomeModel : PageModel
     {
-        public ClientViewModel _clientViewModelClientViewModel;
+      
         public HomeModel(ClientViewModel clientViewModel) 
         {
-            _clientViewModelClientViewModel= clientViewModel;
+           
         }
         public void OnGet()
         {
-            _ = _clientViewModelClientViewModel.Id;
+            
         }
     }
 }

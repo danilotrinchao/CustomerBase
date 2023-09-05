@@ -1,13 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace CostumerBase.Presentation.Mvc.Views.Home
+namespace CostumerBase.Presentation.Mvc.Views.Client
 {
-    public class IndexModel : PageModel
+    public class CreateModel : PageModel
     {
-
         public void OnGet()
         {
         }
+        public void OnPostAsync() { }
     }
 }

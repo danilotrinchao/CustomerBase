@@ -1,0 +1,43 @@
+﻿@model ClientViewModel
+@{
+}
+
+<h1>Endereços do Cliente - @Model.NameClient</h1>
+
+@if (Model.AddressClient != null && Model.AddressClient.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Endereço</th>
+                <th>Cidade</th>
+                <th>Estado</th>
+                <th>Bairro</th>
+                <th>Rua</th>
+                <th>Número</th>
+                <th>Complemento</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var address in Model.AddressClient)
+            {
+                <tr>
+                    <td>@(address.Country ?? "N/A")</td>
+                    <td>@(address.City ?? "N/A")</td>
+                    <td>@(address.State ?? "N/A")</td>
+                    <td>@(address.Neighborhood ?? "N/A")</td>
+                    <td>@(address.Road ?? "N/A")</td>
+                    <td>@(address.Number ?? "N/A")</td>
+                    <td>@(address.Complement ?? "N/A")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Nenhum endereço encontrado para este cliente.</p>
+}
+
+<a asp-page="Details" asp-route-id="@Model.Id">Voltar para os detalhes do cliente</a>
+

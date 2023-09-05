@@ -1,5 +1,4 @@
-﻿@page
-@model List<ClientViewModel>
+﻿@model List<ClientViewModel>
 @{
     
 }
@@ -22,10 +21,10 @@
                 <td>@client.Email</td>
                 <td>@client.Logo</td>
                 <td>
-                    <a asp-page="Details" asp-route-id="@client.Id">Detalhes</a> |
-                    <a asp-page="Edit" asp-route-id="@client.Id">Editar</a> |
-                    <a asp-page="Delete" asp-route-id="@client.Id">Excluir</a> |
-                    <a asp-page="Addresses" asp-route-id="@client.Id">Endereços</a>
+                    <a asp-controller="Client" asp-action="Details" asp-route-id="@client.Id">Detalhes</a>
+                    <a asp-controller="Client" asp-action="Edit" asp-route-id="@client.Id">Editar</a>
+                    <a asp-controller="Client" asp-action="Delete" asp-route-id="@client.Id">Excluir</a>
+                    <a asp-controller="Client" asp-action="Create"> Inserir Cliente</a>
                 </td>
             </tr>
             <tr>
@@ -55,9 +54,10 @@
                                     <td>@(address.Number ?? "N/A")</td>
                                     <td>@(address.Complement ?? "N/A")</td>
                                     <td>
-                                        <a asp-page="EditAddress" asp-route-id="@address.Id">Editar</a> |
-                                        <a asp-page="DeleteAddress" asp-route-id="@address.Id">Excluir</a> |
-                                        <a asp-page="DetailsAddress" asp-route-id="@address.Id">Detalhes</a>
+                                        <a asp-page="/Client/Detail" asp-route-id="@address.Id">Criar</a>
+                                        <a asp-page="/Client/Edit" asp-route-id="@address.Id">Editar</a> |
+                                        <a asp-page="/Client/Delete"  asp-route-id="@address.Id">Excluir</a> |
+                                        <a asp-page="/Client/Address" asp-route-id="@address.Id">Detalhes</a>
                                     </td>
                                 </tr>
                             }

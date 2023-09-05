@@ -13,7 +13,7 @@ namespace CustomerBase.Core.ApplicationService.Interfaces
         Task<List<Client>> GetAll();
         Task<Client> GetById(Guid id);
         Task<Guid> CreateClientWithAddress(Client client);
-        Task<bool> UpdateClientWithAddress(Client client, bool UpdateAddress, Guid? address);
+        Task<bool> UpdateClientWithAddress(Client client);
         Task<bool> DeleteClientWithAddress(Guid id, bool deleteAddress);
         Task<Guid> CreateAddress(Address address);
         Task<bool> UpdateAddress(Guid addressId, string country, string state, string city, string neighborhood, string road, string number, string complement);

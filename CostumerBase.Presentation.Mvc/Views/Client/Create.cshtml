@@ -1,0 +1,105 @@
+﻿
+@model ClientViewModel
+@{
+}
+
+<h1>Criar Novo Cliente</h1>
+
+<form form id="clientForm" method="post" asp-controller="Client" asp-action="OnPostAsync">
+    <div class="form-group">
+        <label for="NameClient">Nome do Cliente</label>
+        <input type="text" id="NameClient" name="NameClient" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="Email">Email</label>
+        <input type="text" id="Email" name="Email" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="Logo">Logotipo</label>
+        <input type="text" id="Logo" name="Logo" class="form-control" />
+    </div>
+
+    <h2>Endereço</h2>
+    <div class="form-group">
+        <label for="Country">País</label>
+        <input type="text" id="Country" name="AddressCountry" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="State">Estado</label>
+        <input type="text" id="State" name="AddressState" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="City">Cidade</label>
+        <input type="text" id="City" name="AddressCity" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="Neighborhood">Bairro</label>
+        <input type="text" id="Neighborhood" name="AddressNeighborhood" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="Road">Rua</label>
+        <input type="text" id="Road" name="AddressRoad" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="Number">Número</label>
+        <input type="text" id="Number" name="AddressNumber" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="Complement">Complemento</label>
+        <input type="text" id="Complement" name="AddressComplement" class="form-control" />
+    </div>
+
+
+    <button type="button" id="addAddress" class="btn btn-secondary">Adicionar Endereço</button>
+
+    <button type="submit" class="btn btn-primary">Inserir Cliente</button>
+</form>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#clientForm").submit(function (event) {
+                event.preventDefault();
+                var clientData = {
+                    id: "3fa85f64-5717-4562-b3fc-2c963f66afa6", 
+                    nameClient: $("#NameClient").val(),
+                    email: $("#Email").val(),
+                    logo: $("#Logo").val(),
+                    addressClient: [
+                        {
+                            id: "3fa85f64-5717-4562-b3fc-2c963f66afa6", 
+                            country: $("#Country").val(),
+                            state: $("#State").val(),
+                            city: $("#City").val(),
+                            neighborhood: $("#Neighborhood").val(),
+                            road: $("#Road").val(),
+                            number: $("#Number").val(),
+                            complement: $("#Complement").val(),
+                            clientId: "3fa85f64-5717-4562-b3fc-2c963f66afa6" 
+                        }
+                    ]
+                };
+
+                $.ajax({
+                    url: 'https://localhost:7108/api/CostumerBase/createClients',
+                    type: 'POST',
+                    headers: {
+                        'accept': '*/*',
+                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGFuaWxvIiwibmJmIjoxNjkzOTQyMTk4LCJleHAiOjE2OTM5NDkzOTgsImlhdCI6MTY5Mzk0MjE5OH0.6ktc7iBK1VXadThMg0aEjqSqMKUHbwU_St3lbiGnWqw',
+                        'Content-Type': 'application/json'
+                    },
+                    data: JSON.stringify(clientData),
+                    success: function (response) {
+                       
+                        window.location.href = '/Client/Detail/' + response.id; 
+                    },
+                    error: function (error) {
+                        console.error(error);
+                    }
+                });
+            });
+        });
+    </script>
+}
+

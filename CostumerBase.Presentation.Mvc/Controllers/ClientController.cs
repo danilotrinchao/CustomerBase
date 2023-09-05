@@ -7,7 +7,7 @@ namespace CostumerBase.Presentation.Mvc.Controllers
 {
     public class ClientController : Controller
     {
-        private readonly ILogger<ClientController> _logger;
+        
         private readonly ICustomerBaseService _customerBaseService;
         public ClientController(ICustomerBaseService customerBaseService)
         {
@@ -26,46 +26,41 @@ namespace CostumerBase.Presentation.Mvc.Controllers
             return Json(result);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Details(Guid id)
         {
-            var cliente = await _customerBaseService.GetClientById(id);
-            if (cliente == null)
+            var client = await _customerBaseService.GetClientById(id);
+            if (client == null)
             {
                 return NotFound();
             }
-            return View(cliente);
+            return View(client);
+        
         }
-
-        public IActionResult Create()
+        [HttpGet]
+        public IActionResult Create(ClientViewModel client)
         {
-            return View();
+            client.Id = Guid.NewGuid();
+            return View("Create", client);
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateClient(ClientViewModel clientViewModel)
+        [HttpGet]
+        public IActionResult Edit(Guid id,ClientViewModel client)
+        {
+            client.Id = id;
+            return View("Edit", client);
+        }
+        public async Task<IActionResult> OnPostAsync(ClientViewModel clientViewModel)
         {
             if (ModelState.IsValid)
             {
-                await _customerBaseService.CreateClientWithAddress(clientViewModel);
+                await _customerBaseService.CreateClient(clientViewModel);
                 return RedirectToAction(nameof(Index));
             }
-            return View(clientViewModel);
+            return Ok(new { clientId = clientViewModel.Id });
+           // return View(clientViewModel);
         }
 
-        public async Task<IActionResult> GetClientById(Guid id)
-        {
-            var cliente = await _customerBaseService.GetClientById(id);
-            if (cliente == null)
-            {
-                return NotFound();
-            }
-            return View(cliente);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditClient(Guid id, ClientViewModel clientViewModel, bool updateAddress)
+        public async Task<IActionResult> EditClient(ClientViewModel clientViewModel, Guid id)
         {
             if (id != clientViewModel.Id)
             {
@@ -74,12 +69,12 @@ namespace CostumerBase.Presentation.Mvc.Controllers
 
             if (ModelState.IsValid)
             {
-                var updated = await _customerBaseService.UpdateClientWithAddress(clientViewModel, updateAddress, id);
+                var updated = await _customerBaseService.UpdateClientWithAddress(clientViewModel, id);
                 if (!updated)
                 {
                     return NotFound();
                 }
-                return RedirectToAction(nameof(Index));
+               // return RedirectToAction("/Edit", new { Guid = clientViewModel.Id = id });
             }
             return View(clientViewModel);
         }
